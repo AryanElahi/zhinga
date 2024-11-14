@@ -24,7 +24,7 @@ router.post ("/creatAnnounce", verifyAccessToken , async (req, res, next) => {
         const userId = await getUserByAccessToken(token)
         result.Uid = String(new Date().getTime()) 
         const  newA = await creatAnnouncement(result, userId)
-        res.send (newA)        
+        res.send ("announcement has been created")        
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
@@ -64,39 +64,14 @@ router.post("/uploadPhotos",verifyAccessToken , async (req, res, next) => {
         next(createError(500, "An unexpected error occurred"));
     }
 });
-router.post("/getbystatecode",verifyAccessToken , async (req, res, next) => {
-    try {
-        const state = req.body.state_code
-        res.send(await getByStateCode(state))        
-    } catch (error) {
-        next(createError(500, "An unexpected error occurred"));
-    }
-})
-router.get("/getallannounce",verifyAccessToken , async (req, res, next) => {
+router.get("/getallannounce" , async (req, res, next) => {
     try {
         res.send(await getAllAnnouns())        
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
 })
-router.post("/getbyUid",verifyAccessToken , async (req, res, next) => {
-    try {
-        const Uid = req.body.Uid
-        res.send(await getByUid(Uid))        
-    } catch (error) {
-        next(createError(500, "An unexpected error occurred"));
-    }
-})
-router.put("/updateannoun",verifyAccessToken , async (req, res, next) => {
-    try {
-        let result = await update.validateAsync(req.body)
-        res.send (await updateAnnoun(result))
-    } catch (error) {
-        next(createError(500, "An unexpected error occurred"));
-    }
-
-})
-router.post("/search" ,verifyAccessToken , async (req, res, next) => {
+router.post("/search" , async (req, res, next) => {
     try {
         const result = await search(req.body)
         res.send(result)        
@@ -104,13 +79,24 @@ router.post("/search" ,verifyAccessToken , async (req, res, next) => {
         next(createError(500, "An unexpected error occurred"));
     }
 })
+router.post("/getbyUid",verifyAccessToken, async (req, res, next) => {
+    try {
+        const Uid = req.body.Uid
+        res.send(await getByUid(Uid))        
+    } catch (error) {
+        next(createError(500, "An unexpected error occurred"));
+    }
+})
 router.delete("/hdelete",verifyAccessToken , async (req, res, next) => {
     try {
         const Uid = req.body.Uid
-        res.send (await deleteAnnoun(Uid))        
+        const delet = await deleteAnnoun(Uid)
+        res.send ("the annonce has been deleted")        
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
 })
 
 module.exports = router
+
+
