@@ -2,7 +2,6 @@ const express = require("express")
 const router = express.Router()
 const createError = require("http-errors")
 const upload = require('./../../../middlewares/photoUploading'); 
-const {signupVal, loginVal} = require("../../../../validation/announce.crud.validation")
 const {getAllUsers,updateUser} = require("../../../../services/user/auth")
 const {
     getAll,
@@ -15,7 +14,9 @@ const {
     search,
     photo_adding,
     checkAnnounce,
-    rejectAnnoun
+    rejectAnnoun,
+    updateAnnoun,
+    getByUid
 } = require("../../../../services/adminpanel/adminannounce/announservices")
 const {
     get_daily_visitors,
@@ -37,7 +38,7 @@ const {
 const {
     promotToAdmin,
 } = require("./../../../../services/adminpanel/userManagement/services")
-const {creatval} = require("./../../../../validation/adminval")
+const {creatval, update} = require("./../../../../validation/adminval")
 const {getUserByAccessToken} = require("../../../../services/user/auth")
 const {
     getAllsliders,
@@ -55,8 +56,6 @@ const {
 } = require("./../../../../services/setting/teamCRUD")
 const { 
     getByStateCode,
-    getByUid,
-    updateAnnoun
 } = require("../../../../services/anouncement/CRUD")
 //Dashboard started
 router.get("/dashboard", async (req, res, next) => {
@@ -82,7 +81,7 @@ try {
     next(createError(500, "An unexpected error occurred"));
 }
 })
-router.get("/notconfirmed", async (req, res, next) => {
+router.get("/notconfirmedrequests", async (req, res, next) => {
     try {
         const notconfirmed = await deleted_or_not_confirmed()
         res.send(notconfirmed)    } 
@@ -161,7 +160,7 @@ router.get("/inprogress",verifyAccessToken, verifyadmin , async (req, res, next)
         next(createError(500, "An unexpected error occurred"));
     }
 });
-router.get("/notconfirmed",verifyAccessToken, verifyadmin , async (req, res, next) => {
+router.get("/notconfirmedannouncements",verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
         const notconfirmed = await deleted_or_not_confirmed()
         res.send(notconfirmed)
@@ -183,7 +182,7 @@ router.post("/varifyannounce",verifyAccessToken, verifyadmin , async (req, res, 
     const ID = req.body.Uid
     const state  = req.body.state
     const result = await checkAnnounce(ID, state)
-    res.send(result) 
+    res.send("the announcement has been aproved") 
     } 
     catch (error) {
         next(createError(500, "An unexpected error occurred"));
@@ -193,7 +192,7 @@ router.post("/rejectannounce",verifyAccessToken, verifyadmin , async (req, res, 
     try {
         const ID = req.body.Uid
         const result = await rejectAnnoun(ID)
-        res.send(result) 
+        res.send("the announcement has been rejected") 
     } 
     catch (error) {
         next(createError(500, "An unexpected error occurred"));
@@ -218,7 +217,7 @@ router.post("/getbystatecode",verifyAccessToken, verifyadmin  , async (req, res,
 router.put("/updateannoun",verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
         let result = await update.validateAsync(req.body)
-        res.send (await updateAnnoun(result))
+        res.send ("The announcement has been updated successfully")
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
@@ -229,7 +228,7 @@ router.post("/creatVisit",verifyAccessToken, verifyadmin , async(req, res, next)
         data = req.body
         data.Uid = new Date().getTime().toString()
         visit = await creatvisit(data)
-        res.send(visit)
+        res.send("the visit has been added successfully")
     } 
     catch (error) {
         next(createError(500, "An unexpected error occurred"));
@@ -243,7 +242,7 @@ router.get("/getAllVisits",verifyAccessToken, verifyadmin , async (req, res, nex
         next(createError(500, "An unexpected error occurred"));
     }
 });
-router.post("/updateVisits",verifyAccessToken, verifyadmin , async(req, res, next) => {
+router.put("/updateVisits",verifyAccessToken, verifyadmin , async(req, res, next) => {
     try {
         ID = req.body.ID
         let requestData = req.body
@@ -252,14 +251,15 @@ router.post("/updateVisits",verifyAccessToken, verifyadmin , async(req, res, nex
         visit = await updateVisits(ID ,data)
         res.send(visit)        
     } catch (error) {
+        console.log(error)
         next(createError(500, "An unexpected error occurred"));
     }
 });
-router.post("/deleteVisit",verifyAccessToken, verifyadmin , async(req, res, next) => {
+router.delete("/deleteVisit",verifyAccessToken, verifyadmin , async(req, res, next) => {
     try {
         ID = req.body.ID
         const del = deleteVisits(ID)
-        res.send(await getAllVisits())        
+        res.send("the record has been deleted successfully")        
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
@@ -270,7 +270,7 @@ router.post("/creatdeal",verifyAccessToken, verifyadmin , async(req, res, next) 
         data = req.body
         data.Uid = new Date().getTime().toString()
         deal = await creatdeal(data)
-        res.send(deal)        
+        res.send("deal has been created successfully")        
     } 
     catch (error) {
         next(createError(500, "An unexpected error occurred"));
@@ -293,10 +293,11 @@ router.post("/updatedeal",verifyAccessToken, verifyadmin , async(req, res, next)
         deal = await updatedeal(ID, data)
         res.send(deal)        
     } catch (error) {
+        console.log(error)
         next(createError(500, "An unexpected error occurred"));
     }
 })
-router.post("/deletedeal",verifyAccessToken, verifyadmin , async(req, res, next) => {
+router.delete("/deletedeal",verifyAccessToken, verifyadmin , async(req, res, next) => {
     try {
         ID = req.body.ID
         const del = deletedeal(ID)
@@ -316,9 +317,12 @@ router.get("/alluseres",verifyAccessToken, verifyadmin , async (req, res, next) 
 router.put("/updateuser",verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
         let result = req.body
-        let phone = req.phone
+        console.log(req.body.phone)
+        let phone = req.body.phone
+        delete result.phone
         res.send(await updateUser(phone, result))
     } catch (error) {
+        console.log(error)
         next(createError(500, "An unexpected error occurred"));
     }
 })
@@ -338,6 +342,7 @@ router.post("/creatslider",verifyAccessToken, verifyadmin , async(req, res, next
         slider = await creatslider(data)
         res.send(slider)        
     } catch (error) {
+        console.log(error)
         next(createError(500, "An unexpected error occurred"));
     }
 })
@@ -396,7 +401,7 @@ router.post("/updateslider",verifyAccessToken, verifyadmin , async (req, res, ne
 router.delete("/deleteslider",verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
         const id = req.body.id
-        res.send( await deleteslider(id))
+        res.send("the slider has been deleted successfully")
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
@@ -404,7 +409,7 @@ router.delete("/deleteslider",verifyAccessToken, verifyadmin , async (req, res, 
 //site setting
 router.post("/initiateSetting",verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
-        res.send (await initiateSetting(req.body))
+        res.send ("the site has been initiated successfully")
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }
@@ -458,8 +463,9 @@ router.post("/creatteam" ,verifyAccessToken, verifyadmin , async(req, res, next)
     try {
         data = req.body
         team = await creatteam(data)
-        res.send(team)        
+        res.send(" team member has been added")        
     } catch (error) {
+        console.log(error)
         next(createError(500, "An unexpected error occurred"));
     }
 })
@@ -483,7 +489,7 @@ router.post("/updateteam" ,verifyAccessToken, verifyadmin , async (req, res, nex
 router.delete("/deleteteam" ,verifyAccessToken, verifyadmin , async (req, res, next) => {
     try {
         const id = req.body.id
-        res.send(await deleteteam(id))
+        res.send("team member has been deleted")
     } catch (error) {
         next(createError(500, "An unexpected error occurred"));
     }

@@ -72,6 +72,7 @@ async function isValid(pass, dpass) {
 
 async function updateUser (phone, result){
   try {
+    console.log(phone)
     const updated = await prisma.user.update({
     where: {phone: phone},
     data : result
@@ -118,7 +119,7 @@ module.exports = {
     signRefreshToken: (phone) => {
       return new Promise((resolve, reject) => {
         const payload = {};
-        const secret = process.env.REFRESH     ;
+        const secret = process.env.REFRESH    ;
         const options = {
           expiresIn: '1y',
           issuer: 'pickurpage.com',

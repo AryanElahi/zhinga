@@ -37,7 +37,7 @@ module.exports = {
   verifyRefreshToken: (refreshToken) => {
     return new Promise((resolve, reject) => {
       // Verify the JWT token
-      JWT.verify(refreshToken, process.env.REFRESH , async (err, payload) => {
+      JWT.verify(refreshToken, process.env.REFRESH  , async (err, payload) => {
         if (err) {
           console.error('JWT Verification Error:', err);  // Debugging log for JWT errors
           if (err.name === 'TokenExpiredError') {
