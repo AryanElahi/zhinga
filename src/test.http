@@ -1,8 +1,0 @@
-post http://localhost:3000/api/V1/admin/initiateSetting
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzE4NTU5NDMsImV4cCI6MTc2MzQxMzU0MywiYXVkIjoiMDkxODE3MTE2OTAiLCJpc3MiOiJwaWNrdXJwYWdlLmNvbSJ9.Gi3drpPOjrnJNKkqzFvF3VhaaqFKZ0xce1Txl4NWMME
-
-{
-  "about": "any",
-  "goals" : "any "
-}
