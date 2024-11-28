@@ -1,42 +1,48 @@
-Here's the markdown code for your GitHub `README.md`:
+🚀 Getting Started
+💻 Prerequisites
+Before you begin, ensure you have the following installed:
 
-```markdown
-# 🌟 **Zhingeh** 🌟  
+Node.js: Version 16.13 or later. Download it here.
+Database: Supported databases include:
+PostgreSQL
+MySQL
+SQLite
+Redis: For efficient caching and real-time updates. Download and set it up here.
+Ensure these tools are properly configured in your environment.
 
-🚀 **A modern, lightweight, and secure project designed for scalability and performance.**  
-With built-in support for JWT-based authentication, Prisma ORM, Redis caching, and more, Zhingeh simplifies the development of powerful, production-ready applications.
+⚙️ Installation
+Follow these steps to set up the project on your local machine:
 
----
+Clone the Repository
+Use the following command to clone this repository to your local machine:
 
-## 🌟 **Features**  
-
-- ⚡ **Lightweight**: Minimal dependencies for maximum efficiency.  
-- 🔒 **Secure**: Passwords hashed with `bcrypt` and authentication powered by `jsonwebtoken`.  
-- 🔄 **Flexible**: Customize to suit your unique needs.  
-- 📈 **Scalable**: Redis integration ensures high-performance caching and real-time updates.  
-
----
-
-## 🚀 **Getting Started**
-
-### 💻 Prerequisites  
-
-- **Node.js** (version >= 16.13): [Download here](https://nodejs.org/).  
-- **Database**: Supported by Prisma (e.g., PostgreSQL, MySQL, SQLite).  
-- **Redis**: For caching and real-time features.
-
----
-
-### ⚙️ **Installation**
-
-Clone the repository and install dependencies:  
-
-```bash
 git clone https://github.com/your-repo/zhingeh.git
-cd zhingeh
-npm install
-```
+Navigate to the Project Directory
+Change your directory to the newly cloned project folder:
 
+cd zhingeh
+Install Dependencies
+Install all required dependencies with the following command:
+
+npm install
+Configure Environment Variables
+Create a .env file in the root directory of the project and configure the necessary environment variables, such as:
+
+DATABASE_URL=<your-database-url>
+JWT_SECRET=<your-secret-key>
+REDIS_URL=<your-redis-url>
+▶️ Running the Application
+🌟 Production Mode
+To run the application in production mode, use:
+
+npm start
+The app will be accessible at http://localhost:3000.
+
+🔥 Development Mode
+For live reloading during development, run:
+
+npm run dev
+This will start the app in development mode with Hot Module Replacement (HMR) enabled.
 ---
 
 ### 🛠️ **Setup**
