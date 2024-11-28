@@ -1,4 +1,4 @@
-### 🚀 Getting Started
+## 🚀 Getting Started
 💻 Prerequisites
 Before you begin, make sure you have the following installed and configured:
 
@@ -15,9 +15,8 @@ Redis: For efficient caching and real-time updates.
 
 Ensure these tools are properly set up in your environment.
 
----
 
-### ⚙️ Installation
+## ⚙️ Installation
 Follow these steps to set up the project:
 
 1️⃣ Clone the Repository
@@ -46,7 +45,6 @@ npm start
 The app will be accessible at:
 http://localhost:3000
 
----
 
 ## 🔥 Development Mode
 For live reloading during development, run:
