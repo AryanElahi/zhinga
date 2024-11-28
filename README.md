@@ -15,7 +15,7 @@ Redis: For efficient caching and real-time updates.
 
 Ensure these tools are properly set up in your environment.
 
-⚙️ Installation
+### ⚙️ Installation
 Follow these steps to set up the project:
 
 1️⃣ Clone the Repository
