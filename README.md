@@ -1,13 +1,150 @@
-an online website for zhingeh realstate agency that allow clients to see the houses in 3d and reserve online visiting for houses 
-=================================================================================================================================
-technology used:
-          postgress & prisma
-          express as platform
-          API versioning
-          REST Architecture
-          Reds 
-          JWT
-          joi for validation 
-          bcrypt
+🌟 Zhingeh 🌟
+🚀 A modern, lightweight, and secure project designed for scalability and performance.
+With built-in support for JWT-based authentication, Prisma ORM, Redis caching, and more, Zhingeh simplifies the development of powerful, production-ready applications.
 
+🌟 Features
+⚡ Lightweight: Minimal dependencies for maximum efficiency.
+🔒 Secure: Passwords hashed with bcrypt and authentication powered by jsonwebtoken.
+🔄 Flexible: Customize to suit your unique needs.
+📈 Scalable: Redis integration ensures high-performance caching and real-time updates.
+🚀 Getting Started
+💻 Prerequisites
+Node.js (version >= 16.13): Download here.
+Database: Supported by Prisma (e.g., PostgreSQL, MySQL, SQLite).
+Redis: For caching and real-time features.
+⚙️ Installation
+Clone the repository and install dependencies:
 
+git clone https://github.com/your-repo/zhingeh.git
+cd zhingeh
+npm install
+🛠️ Setup
+Create a .env file in the root directory to configure your environment variables:
+
+DATABASE_URL=<your-database-url>
+JWT_SECRET=<your-secret-key>
+REDIS_URL=<your-redis-url>
+▶️ Run the Application
+🌟 Start in Production Mode
+npm start
+Access the app at http://localhost:3000.
+
+🔥 Start in Development Mode
+npm run dev
+Live reloading enabled for rapid development.
+
+📂 Folder Structure
+Here’s an overview of the project structure:
+
+├── 📁src
+│   └── 📁api
+│       └── 📁middlewares
+│           └── errorHandeler.js
+│           └── isAuth.middleware.js
+│           └── photoUploading.js
+│       └── 📁routes
+│           └── 📁V1
+│               └── 📁admin
+│                   └── admin.rout.js
+│               └── 📁announce
+│                   └── announce.rout.js
+│               └── 📁request
+│                   └── request.rout.js
+│               └── 📁user
+│                   └── auth.rout.js
+│               └── index.js
+│           └── .DS_Store
+│           └── index.js
+│       └── .DS_Store
+│   └── 📁Documentation
+│       └── .DS_Store
+│       └── final version.html
+│       └── swagerVersion.text
+│       └── viewVersion.html
+│   └── 📁loader
+│       └── express.js
+│       └── index.js
+│       └── redis.js
+│   └── 📁logs
+│       └── 📁sms-irs
+│           └── 14-11-2024.log
+│           └── 31-10-2024.log
+│   └── 📁photos
+│   └── 📁prisma
+│       └── 📁migrations
+│           └── 📁20241030221837_final
+│               └── migration.sql
+│           └── migration_lock.toml
+│       └── .env
+│       └── schema.prisma
+│       └── tsconfig.json
+│   └── 📁services
+│       └── 📁adminpanel
+│           └── 📁adminannounce
+│               └── .DS_Store
+│               └── announservices.js
+│           └── 📁deal
+│               └── CRUD.js
+│           └── 📁userManagement
+│               └── services.js
+│           └── 📁visit
+│               └── CRUD.js
+│           └── .DS_Store
+│           └── visitCountingServices.js
+│       └── 📁anouncement
+│           └── CRUD.js
+│       └── 📁request
+│           └── services.js
+│       └── 📁setting
+│           └── services.js
+│           └── teamCRUD.js
+│       └── 📁sliders
+│           └── CRUD.js
+│       └── 📁user
+│           └── 📁logs
+│               └── 📁sms-irs
+│                   └── .DS_Store
+│                   └── 1-10-2024.log
+│                   └── 11-06-2024.log
+│                   └── 2-10-2024.log
+│                   └── 9-10-2024.log
+│               └── .DS_Store
+│           └── auth.js
+│           └── sms.js
+│       └── .DS_Store
+│   └── 📁validation
+│       └── adminval.js
+│       └── announce.crud.validation.js
+│       └── request.validation.js
+│       └── user.auth.validation copy.js
+│   └── .DS_Store
+│   └── index.js
+🧩 Core Dependencies
+Dependency	Purpose
+🔒 bcrypt	Secure password hashing.
+🔑 jsonwebtoken	Token-based authentication.
+📚 Prisma	Type-safe database client.
+🔄 Redis	High-performance caching and pub/sub.
+📦 dotenv	Environment variable management.
+📤 multer	File upload handling.
+🛠️ Contributing
+We ❤️ contributions! Follow these steps to get involved:
+
+Fork the repo: Click the Fork button at the top.
+
+Clone your fork:
+
+git clone https://github.com/your-username/zhingeh.git
+Create a branch:
+
+git checkout -b feature/your-feature-name
+Make changes and commit:
+
+git add .
+git commit -m "Add your meaningful commit message here"
+Push your branch and submit a Pull Request (PR)! 🎉
+
+📝 License
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+Let me know if you need further adjustments! 😊
