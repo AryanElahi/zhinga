@@ -48,7 +48,7 @@ http://localhost:3000
 
 ---
 
-🔥 Development Mode
+## 🔥 Development Mode
 For live reloading during development, run:
 
 npm run dev
