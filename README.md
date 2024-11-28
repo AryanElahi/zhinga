@@ -15,6 +15,8 @@ Redis: For efficient caching and real-time updates.
 
 Ensure these tools are properly set up in your environment.
 
+---
+
 ### ⚙️ Installation
 Follow these steps to set up the project:
 
@@ -43,6 +45,8 @@ To run the application in production mode, use:
 npm start
 The app will be accessible at:
 http://localhost:3000
+
+---
 
 🔥 Development Mode
 For live reloading during development, run:
