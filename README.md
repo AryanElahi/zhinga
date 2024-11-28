@@ -64,7 +64,6 @@ npm install
 
 # Run the application in development mode
 npm run dev
-
 ---
 
 ### ▶️ **Run the Application**
